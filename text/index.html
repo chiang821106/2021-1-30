@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Doctment</title>
+    <link rel="stylesheet" href="bootstrap-5.0.0/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="bootstrap-5.0.0/dist/css/bootstrap-grid.min.css">
+    <link rel="stylesheet" href="css/index.css">
+</head>
+<body>
+    <nav class="bg-warning">
+        <div class="row justify-content-center align-items-center">
+            <div class="col">
+                <ul>
+                    <li>
+                        {{if !isset($smarty.session.USR) || !isset($smarty.session.PWD)}}
+                            <a href="admin.php">管理員登入</a>
+                        {{else}}
+                            <a href="logout.php">管理員登出</a>
+                        {{/if}}
+                    </li>
+                </ul>
+            </div>
+            <div class="page col-2">
+                    第
+                    <select name="page">
+                    </select>
+                    頁
+            </div>
+            <div class="col">
+                <button id="head">|<</button>
+                <button id="prev"><</button>
+                <span id="pageShow">1</span>
+                <button id="next">></button>
+                <button id="end">>|</button>
+            </div>
+            <div class="col">
+                到
+                <input type="text" name="page" size="3">
+                頁
+            </div>
+            <div class="col input-group input-group-sm">
+                <select name="sort">
+                    <option value="Subject">主旨</option>
+                    <option value="Name">暱稱</option>
+                    <option value="Email">信箱</option>
+                    <option value="Gender">性別</option>
+                    <option value="Content">留言</option>
+                    <option value="Reply">回覆</option>
+                </select>
+                <input name="search" type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm">
+                <button name="schBtn" type="b
+                utton" class="btn btn-outline-secondary">查尋</button>
+                <button name="deschBtn" type="button" class="btn btn-outline-danger">取消</button>
+            </div>
+            <div class="col">
+                {{if isset($smarty.session.USR)}}
+                    您好,{{$smarty.session.USR}}
+                {{else}}
+                    目前身份為訪客
+                {{/if}}
+            </div>
+        </div>
+    </nav>
+    <div class="fixTop"></div>
+    <br>
+    <div class="tableShow"></div>
+    <div class="fix"></div>
+    <section>
+        <div class="fileLink col-1">
+            <form method="post" action="upload.php" enctype="multipart/form-data">
+                選擇檔案：<input id="file" class="mb-2" name="file" type="file" />
+                <br />
+                <input class="btn btn-primary btn-sm mb-2" type="submit" value="上傳檔案" />
+            </form>
+            <!-- <button type="" class="btn btn-primary btn-sm mb-2">檔案上傳</button> -->
+            <a href="download.html"><button class="btn btn-primary btn-sm">檔案下載</button></a>
+        </div>
+        <div class="row justify-content-center addChat">
+                <div class="col-5">
+                    <table class="table table-success table-striped">
+                        <tr>
+                            <td>主旨</td>
+                            <td><input name="subject" type="text" size="20"></td>
+                            <td>暱稱</td>
+                            <td><input name="name" type="text" size="20"></td>
+                        </tr>
+                        <tr>
+                            <td>信箱</td>
+                            <td><input name="email" type="text" size="20"></td>
+                            <td>性別</td>
+                            <td>
+                                男<input  type="radio" name="genderAdd" value="1" checked>
+                                女<input  type="radio" name="genderAdd" value="2">
+                            </td>
+                        </tr>                
+                        <tr>
+                            <td>留言內容</td>
+                            <td colspan="3">
+                                <textarea name="content" id="" cols="35" rows="3"></textarea>
+                            </td>
+                        </tr>
+                    </table>
+                    <input class="addBtn col- btn btn-info text-center" type="submit" value="新增">
+                </div>
+            </div>
+    </section>
+    <script src="js/jquery-3.5.1.min.js"></script>
+    <script src="js/index.js"></script>
+</body>
+</html>
